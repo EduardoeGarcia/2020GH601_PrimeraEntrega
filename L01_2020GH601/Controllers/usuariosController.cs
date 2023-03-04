@@ -71,7 +71,7 @@ namespace L01_2020GH601.Controllers
 
 
             _blogDBContexto.Entry(usuarioActual).State = EntityState.Modified;
-            _blogDBContexto.SaveChanges();
+            _blogDBContexto.SaveChanges(); 
             return Ok(usuarioModificar);
         }
 
