@@ -101,33 +101,37 @@ namespace L01_2020GH601.Controllers
 
         public IActionResult FindByData(string nombre, string apellido)
         {
-            usuarios? usuario = (from e in _blogDBContexto.usuarios
-                                 where e.nombre.Contains(nombre)
-                                 where e.apellido.Contains(apellido)
-                                 select e).FirstOrDefault();
+            List<usuarios> listadoUsuarios = (from e in _blogDBContexto.usuarios
+                                              where e.nombre.Contains(nombre)
+                                              where e.apellido.Contains(apellido)
+                                              select e).ToList();
 
-            if (usuario == null)
+            if (listadoUsuarios.Count() == 0)
             {
                 return NotFound();
             }
-            return Ok(usuario);
+
+            return Ok(listadoUsuarios);
+
         }
 
-        //metodo para filtrar por rolId
+        //metodo para filtrar listado de usuarios por rolId
         [HttpGet]
         [Route("Find/{filtroRol}")]
 
         public IActionResult FindByRol(int filtroRol)
         {
-            usuarios? usuario = (from e in _blogDBContexto.usuarios
-                                 where e.rolId == filtroRol
-                                 select e).FirstOrDefault();
 
-            if (usuario == null)
+            List<usuarios> listadoUsuarios = (from e in _blogDBContexto.usuarios
+                                              where e.rolId == filtroRol
+                                                        select e).ToList();
+
+            if (listadoUsuarios.Count() == 0)
             {
                 return NotFound();
             }
-            return Ok(usuario);
+
+            return Ok(listadoUsuarios);
         }
 
 
