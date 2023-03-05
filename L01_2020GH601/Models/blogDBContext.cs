@@ -11,5 +11,7 @@ namespace L01_2020GH601.Models
         }
 
         public DbSet<usuarios> usuarios { get; set; }
+        public DbSet<publicaciones> publicaciones { get; set; }
+        public DbSet<comentarios> comentarios { get; set; }
     }
 }

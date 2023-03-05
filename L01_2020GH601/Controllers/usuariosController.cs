@@ -95,5 +95,41 @@ namespace L01_2020GH601.Controllers
             return Ok(usuario);
         }
 
+        //metodo para filtrar el listado de usuarios por nombre y apellido
+        [HttpGet]
+        [Route("Find/{nombre},{apellido}")]
+
+        public IActionResult FindByData(string nombre, string apellido)
+        {
+            usuarios? usuario = (from e in _blogDBContexto.usuarios
+                                 where e.nombre.Contains(nombre)
+                                 where e.apellido.Contains(apellido)
+                                 select e).FirstOrDefault();
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return Ok(usuario);
+        }
+
+        //metodo para filtrar por rolId
+        [HttpGet]
+        [Route("Find/{filtroRol}")]
+
+        public IActionResult FindByRol(int filtroRol)
+        {
+            usuarios? usuario = (from e in _blogDBContexto.usuarios
+                                 where e.rolId == filtroRol
+                                 select e).FirstOrDefault();
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return Ok(usuario);
+        }
+
+
     }
 }
